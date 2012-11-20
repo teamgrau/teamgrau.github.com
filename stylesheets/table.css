@@ -15,11 +15,11 @@ caption {
   font: bold 16px arial, helvetica, sans-serif;
   background: transparent;
   padding:6px 4px 8px 0px;
-  color: #CC00FF;
+  /*color: #CC00FF;*/
   text-transform: uppercase;
 }
 thead, tfoot {
-background:url(bg1.png) repeat-x;
+/*background:url(bg1.png) repeat-x;*/
 text-align:left;
 height:30px;
 }
