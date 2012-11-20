@@ -2,6 +2,19 @@
 	Web20 Table Style
 	written by Netway Media, http://www.netway-media.com
 */
+/*.myTable {
+  display: table;
+}
+.myTable a {
+  display: table-row;
+}
+.myTable a span {
+  display: table-cell;
+  padding: 2px; /* this line not really needed 
+}
+*/
+
+
 table {
   border-collapse: collapse;
   border: 1px solid #666666;
