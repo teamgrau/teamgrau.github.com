@@ -40,8 +40,8 @@ thead th, tfoot th {
 padding:5px;
 }
 table a {
-color: #333333;
-text-decoration:none;
+/*color: #333333;*/
+text-decoration:underline;
 }
 table a:hover {
 text-decoration:underline;
