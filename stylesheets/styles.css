@@ -38,6 +38,12 @@ a {
   text-decoration:none;
 }
 
+.menu {
+  font-weight:bold;
+  color:#494949;
+  text-decoration:underline;
+}
+
 a small {
   font-size:11px;
   color:#777;
