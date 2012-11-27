@@ -12,6 +12,16 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script src="javascripts/galleria/galleria-1.2.8.min.js"></script>
+    <script>
+      Galleria.loadTheme('javascripts/galleria/themes/classic/galleria.classic.min.js');
+      Galleria.run('#galleria');
+    </script>
+    <style>
+      #galleria{ width: 500px; height: 400px; background: #000 }
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -35,7 +45,17 @@
           stories, pictures, fun facts or unicorns which wait to be discovered by you. After 
           discovering your environment, the fog lifts along your path and will result in 
           something like the following pictures.</p>
-        
+
+        <div id="galleria">
+          <a href="pics/pp1.jpg"><img src="pics/pp1.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp2.jpg"><img src="pics/pp2.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp3.jpg"><img src="pics/pp3.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp4.jpg"><img src="pics/pp4.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp5.jpg"><img src="pics/pp5.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp6.jpg"><img src="pics/pp6.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp7.jpg"><img src="pics/pp7.jpg" data-title="" data-description=""></a>
+        </div>
+        <!--
         <img src="pics/pp1.jpg" width="70%" align="center">
         <img src="pics/pp2.jpg" width="70%" align="center">
         <img src="pics/pp3.jpg" width="70%" align="center">
@@ -43,7 +63,7 @@
         <img src="pics/pp5.jpg" width="70%" align="center">
         <img src="pics/pp6.jpg" width="70%" align="center">
         <img src="pics/pp7.jpg" width="70%" align="center">
-
+        -->
       </section>
       <footer>
         <p><a href="index.html">-> Home</a></p>
