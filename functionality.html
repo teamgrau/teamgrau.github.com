@@ -17,7 +17,7 @@
     <script src="javascripts/galleria/galleria-1.2.8.min.js"></script>
     <script>
       Galleria.loadTheme('javascripts/galleria/themes/classic/galleria.classic.min.js');
-      Galleria.run('#galleria');
+      Galleria.run('#galleria', {showInfo: true});
     </script>
     <style>
       #galleria{ width: 500px; height: 400px; background: #000 }
@@ -47,13 +47,27 @@
           something like the following pictures.</p>
 
         <div id="galleria">
-          <a href="pics/pp1.jpg"><img src="pics/pp1.jpg" data-title="" data-description=""></a>
-          <a href="pics/pp2.jpg"><img src="pics/pp2.jpg" data-title="" data-description=""></a>
-          <a href="pics/pp3.jpg"><img src="pics/pp3.jpg" data-title="" data-description=""></a>
-          <a href="pics/pp4.jpg"><img src="pics/pp4.jpg" data-title="" data-description=""></a>
-          <a href="pics/pp5.jpg"><img src="pics/pp5.jpg" data-title="" data-description=""></a>
-          <a href="pics/pp6.jpg"><img src="pics/pp6.jpg" data-title="" data-description=""></a>
-          <a href="pics/pp7.jpg"><img src="pics/pp7.jpg" data-title="" data-description=""></a>
+          <a href="pics/pp1.jpg">
+            <img src="pics/pp1.jpg" data-title="Startscreen" data-description="If the user starts the app the first time he will be greeted with the following screen.">
+          </a>
+          <a href="pics/pp2.jpg">
+            <img src="pics/pp2.jpg" data-title="Startscreen" data-description="Closeup">
+          </a>
+          <a href="pics/pp3.jpg">
+            <img src="pics/pp3.jpg" data-title="On the way" data-description="After some exploration the map could look something like this.">
+          </a>
+          <a href="pics/pp4.jpg">
+            <img src="pics/pp4.jpg" data-title="POI Dialog" data-description="If the user explored the area of a POI he can click it to get more information on it">
+          </a>
+          <a href="pics/pp5.jpg">
+            <img src="pics/pp5.jpg" data-title="POI Dialog" data-description="In the POI dialog, storie associated with this POI.">
+          </a>
+          <a href="pics/pp6.jpg">
+            <img src="pics/pp6.jpg" data-title="New POI Dialog" data-description="The user found something cool and wants to share it on Altourism. He can add pictures, text or a sound recording.">
+          </a>
+          <a href="pics/pp7.jpg">
+            <img src="pics/pp7.jpg" data-title="Account Dialog" data-description="Someone can use Altourism completely anonymous. But if she wants to be social or get updates of areas already explored she could link with a facebook twitter or email account.">
+          </a>
         </div>
         <!--
         <img src="pics/pp1.jpg" width="70%" align="center">
@@ -66,7 +80,6 @@
         -->
       </section>
       <footer>
-        <p><a href="index.html">-> Home</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
