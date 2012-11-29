@@ -1,0 +1,18 @@
+.ui-progressbar *
+	{ margin: 0; padding: 0; }
+
+.ui-progressbar dl
+	{ height: 100%; }
+
+.ui-progressbar dt
+	{ width: 0; height: 0; overflow: hidden; }
+
+.ui-progressbar dd
+	{ text-indent: -9000px; height: 100%; float: left; }
+
+.ui-progressbar-value {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    padding-left: 10px;
+}
