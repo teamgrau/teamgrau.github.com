@@ -19,12 +19,13 @@
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script>
-      
+      alert("before");
       $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1',
                 function(data) {
         var val = 0;
         var completed = 0;
         var total = 0;
+        alert("compl: " + completed + " total: " + total);
         $.each(data, function(key, val) {
           if (key === 'closed_issues')
             completed = val;
@@ -41,7 +42,9 @@
           .css("display", "block");
         });
       })
-      .error(function() {alert("error");});
+      .success(function() {alert("success");})
+      .error(function(data) {alert("error:" + data[0].val);})
+      .complete(function() {alert("complete");});
     </script>
 
   </head>
