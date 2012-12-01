@@ -40,9 +40,9 @@
           $( "#progressbar" ).progressbar({
               value: val
           })
-          /*.children('.ui-progressbar-value')
+          .children('.ui-progressbar-value')
           .html(val.toPrecision(3) + '%')
-          .css("display", "block")*/;
+          .css("display", "block");
         });
         $('<ul/>', {
           'class': 'my-new-list',
@@ -50,7 +50,7 @@
         }).appendTo('body');
       })
       .success(function() {alert("success");})
-      .error(function(data) {alert("error");})
+      .error(function(data) {alert("Error, sorry no dynamic progress bar. :-(");})
       .complete(function() {alert("complete");});
     </script>
 
