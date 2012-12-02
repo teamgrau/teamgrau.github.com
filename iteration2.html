@@ -18,7 +18,61 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
+      //alert("before");
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1',
+                function(data, status, xhr) {
+        alert("status: " + status);
+        var val = 0;
+        var completed = 0;
+        var total = 0;
+        var items = [];
+        //alert("compl: " + completed + " total: " + total);
+        $.each(data, function(key, val) {
+          items.push('<li id="' + key + '">' + val + '</li>');
+          if (key === 'closed_issues')
+            completed = val;
+          else if (key === 'open_issues')
+            total = val
+        });
+        val = (completed/total)*100;
+        $(function() {
+          $( "#progressbar" ).progressbar({
+              value: val
+          })
+          .children('.ui-progressbar-value')
+          .html(val.toPrecision(3) + '%')
+          .css("display", "block");
+        });
+        $('<ul/>', {
+          'class': 'my-new-list',
+          html: items.join('')
+        }).appendTo('body');
+      })
+      .success(function() {alert("success");})
+      .error(function(data) {alert("Error, sorry no dynamic progress bar. :-(");})
+      .complete(function() {alert("complete");});
+    </script>-->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Altourism beta</h1>
+        <p>Softwareproject Human-Centered Computing</p>
+
+        <h3><a href="./index.html"><div>Home</div></a></h3>
+        <h3><a href="./persona.html"><div>Persona</div></a></h3>
+        <h3><a href="./functionality.html"><div>Functionality</div></a></h3>
+        <h3><a href="./iteration_plan.html"><div>Iteration Plan</div></a></h3>
+
+        <p class="view"><a href="https://github.com/teamgrau">View Our GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h3>Progress</h3>
+        <div id="progressbar"></div>
+        <script type="text/javascript">
       //alert("before");
       $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1',
                 function(data, status, xhr) {
@@ -53,25 +107,6 @@
       .error(function(data) {alert("Error, sorry no dynamic progress bar. :-(");})
       .complete(function() {alert("complete");});
     </script>
-
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Altourism beta</h1>
-        <p>Softwareproject Human-Centered Computing</p>
-
-        <h3><a href="./index.html"><div>Home</div></a></h3>
-        <h3><a href="./persona.html"><div>Persona</div></a></h3>
-        <h3><a href="./functionality.html"><div>Functionality</div></a></h3>
-        <h3><a href="./iteration_plan.html"><div>Iteration Plan</div></a></h3>
-
-        <p class="view"><a href="https://github.com/teamgrau">View Our GitHub Profile</a></p>
-
-      </header>
-      <section>
-        <h3>Progress</h3>
-        <div id="progressbar"></div>
         
         <h3>User Stories</h3>
 	  <p>
