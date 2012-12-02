@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <link rel="stylesheet" href="stylesheets/table.css">
-    <link rel="stylesheet" href="stylesheets/progressbar.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap_own.css" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -70,8 +70,10 @@
 
       </header>
       <section>
-        <!--<h3>Progress</h3>
-        <div id="progressbar"></div>-->
+        <h3>Progress</h3>
+        <div class="progress">
+          <div id="progressbar" class="bar" style="width: 0%;"></div>
+        </div>
         
         <h3>User Stories</h3>
 	  <p>
@@ -122,6 +124,38 @@ Anwendung formuliert.</a>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript">
+      //alert("before");
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1',
+                function(data, status, xhr) {
+        //alert("status: " + status);
+        var val = 0;
+        var completed = 0;
+        var total = 0;
+        var items = [];
+        //alert("compl: " + completed + " total: " + total);
+        $.each(data, function(key, val) {
+          items.push('<li id="' + key + '">' + val + '</li>');
+          if (key === 'closed_issues')
+            completed = val;
+          else if (key === 'open_issues')
+            total = val
+        });
+        val = (completed/total)*100;
+        $("#progressbar").css("width", val);
+        /*$(function() {
+          $( "#progressbar" ).progressbar({
+              value: val
+          })
+          .children('.ui-progressbar-value')
+          .html(val.toPrecision(3) + '%')
+          .css("display", "block");
+        });*/
+      })
+      //.success(function() {alert("success");})
+      .error(function(data) {alert("Error, sorry no dynamic progress bar. :-(");});
+      //.complete(function() {alert("complete");});
+    </script>
   </body>
 </html>
