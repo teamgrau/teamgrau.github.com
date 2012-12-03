@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <link rel="stylesheet" href="stylesheets/table.css">
-    <link rel="stylesheet" href="stylesheets/progressbar.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap_own.css" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -57,10 +57,10 @@
         <h1>Altourism beta</h1>
         <p>Softwareproject Human-Centered Computing</p>
 
-        <h3><a href="./index.html"><div class="menu">Home</div></a></h3>
-        <h3><a href="./persona.html"><div class="menu">Persona</div></a></h3>
-        <h3><a href="./functionality.html"><div class="menu">Functionality</div></a></h3>
-        <h3><a href="./iteration_plan.html"><div class="menu">Iteration Plan</div></a></h3>
+        <h3><a href="./index.html"><div >Home</div></a></h3>
+        <h3><a href="./persona.html"><div>Persona</div></a></h3>
+        <h3><a href="./functionality.html"><div>Functionality</div></a></h3>
+        <h3><a href="./iteration_plan.html"><div>Iteration Plan</div></a></h3>
 
         <p class="view"><a href="https://github.com/teamgrau">View Our GitHub Profile</a></p>
 
@@ -90,7 +90,11 @@
                   <li>Central sequences of our interaction framework</li>
                 </ul>
               </td>
-              <td><div id="progressbar1"></div></td>
+              <td>
+                <div class="progress">
+                  <div id="progressbar1" class="bar" style="width: 100%;"></div>
+                </div>
+              </td>
             </tr>
             <tr class="odd">
               <th scope="row" id="i2"><a href="iteration2.html">2<sup>nd</sup> Iteration (de)</a></th>
@@ -101,7 +105,11 @@
                   <li>Get used to Frameworks/Dev. Environments/Best Practise</li>
                 </ul>
               </td>
-              <td><div id="progressbar2"></div></td>
+              <td>
+                <div class="progress">
+                  <div id="progressbar2" class="bar" style="width: 0%;"></div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -112,6 +120,39 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript">
+      //alert("before");
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1?callback=?',
+                function(json) {
+        //alert("status: " + status);
+        var val = 0;
+        var completed = 0;
+        var total = 0;
+        var items = [];
+        //alert("compl: " + completed + " total: " + total);
+        $.each(json.data, function(key, val) {
+          items.push('<li id="' + key + '">' + val + '</li>');
+          //alert("key: "+key+" val: "+val);
+          if (key === 'closed_issues')
+            completed = val;
+          else if (key === 'open_issues')
+            total = val
+        });
+        val = (completed/total)*100;
+        $("#progressbar2").css("width", val);
+        /*$(function() {
+          $( "#progressbar" ).progressbar({
+              value: val
+          })
+          .children('.ui-progressbar-value')
+          .html(val.toPrecision(3) + '%')
+          .css("display", "block");
+        });*/
+      })
+      //.success(function() {alert("success");})
+      .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
+      //.complete(function() {alert("complete");});
+    </script>
   </body>
 </html>
