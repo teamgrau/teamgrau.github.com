@@ -78,6 +78,7 @@ Anwendung formuliert.</a>
           <ul>
             <li><a href="">consectetur adipiscing elit.</a></li>
           </ul>-->
+        <h3 id="done">Done</h3>
 
       </section>
       <footer>
@@ -124,6 +125,24 @@ Anwendung formuliert.</a>
                     $('<div/>', {html: items.join('')}).appendTo('#responsibilities');
                   });
       };
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/issues?milestone=1&status=closed&callback=?', 
+                  function(json){
+                    var items = [];
+                    items.push("<ul>")
+                    for (var i = json.data.length - 1; i >= 0; i--) {
+                      var url;
+                      var title;
+                      $.each(json.data[i], function(key, val) {
+                        if (key === 'html_url')
+                          url = val;
+                        if (key == 'title')
+                          title = val;
+                      });
+                      items.push('<li><a href="' + url +'"><strike>' + title + '</strike></a></li>')
+                    };
+                    items.push('</ul>');
+                    $('<div/>', {html: items.join('')}).appendTo('#done');
+                  });
       $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1?callback=?',
                 function(json) {
         //alert("status: " + status);
