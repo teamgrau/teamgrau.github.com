@@ -127,16 +127,17 @@ Anwendung formuliert.</a>
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript">
       //alert("before");
-      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1',
-                function(data, status, xhr) {
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1?callback=?',
+                function(json) {
         //alert("status: " + status);
         var val = 0;
         var completed = 0;
         var total = 0;
         var items = [];
         //alert("compl: " + completed + " total: " + total);
-        $.each(data, function(key, val) {
+        $.each(json.data, function(key, val) {
           items.push('<li id="' + key + '">' + val + '</li>');
+          //alert("key: "+key+" val: "+val);
           if (key === 'closed_issues')
             completed = val;
           else if (key === 'open_issues')
@@ -154,7 +155,7 @@ Anwendung formuliert.</a>
         });*/
       })
       //.success(function() {alert("success");})
-      .error(function(data) {alert("Error, sorry no dynamic progress bar. :-(");});
+      .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
       //.complete(function() {alert("complete");});
     </script>
   </body>
