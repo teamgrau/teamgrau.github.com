@@ -13,47 +13,6 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-    <script type="text/javascript">
-      //alert("before");
-      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1',
-                function(data, status, xhr) {
-        alert("status: " + status);
-        var val = 0;
-        var completed = 0;
-        var total = 0;
-        var items = [];
-        //alert("compl: " + completed + " total: " + total);
-        $.each(data, function(key, val) {
-          items.push('<li id="' + key + '">' + val + '</li>');
-          if (key === 'closed_issues')
-            completed = val;
-          else if (key === 'open_issues')
-            total = val
-        });
-        val = (completed/total)*100;
-        $(function() {
-          $( "#progressbar" ).progressbar({
-              value: val
-          })
-          .children('.ui-progressbar-value')
-          .html(val.toPrecision(3) + '%')
-          .css("display", "block");
-        });
-        $('<ul/>', {
-          'class': 'my-new-list',
-          html: items.join('')
-        }).appendTo('body');
-      })
-      .success(function() {alert("success");})
-      .error(function(data) {alert("Error, sorry no dynamic progress bar. :-(");})
-      .complete(function() {alert("complete");});
-    </script>-->
-
   </head>
   <body>
     <div class="wrapper">
@@ -106,8 +65,8 @@ Anwendung formuliert.</a>
 	    Wir sehen diese Iteration als erfolgreich an, wenn alle Issues der <a href="https://github.com/teamgrau/altourism/issues?labels=1.+User+Story&page=1&sort=created&state=open">
 1. User Story</a> geschlossen werden können.
 	  </p>
-        <h3>Responsibilities</h3>
-          <h4>Simon</h4>
+        <h3 id="responsibilities">Responsibilities</h3>
+          <!--<h4>Simon</h4>
           <ul>
             <li><a href="">Lorem ipsum</a></li>
           </ul>
@@ -118,7 +77,7 @@ Anwendung formuliert.</a>
           <h4>Valerian</h4>
           <ul>
             <li><a href="">consectetur adipiscing elit.</a></li>
-          </ul>
+          </ul>-->
 
       </section>
       <footer>
@@ -129,6 +88,42 @@ Anwendung formuliert.</a>
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript">
       //alert("before");
+      /*var users =  {Thomas:"thomaseichinger", Simon:"cellard0or", Valerian:"valerianBlos"];
+      for (u in users) {
+        alert("Name: " + u + " nick: " + users[u]);
+      }*/
+      function mapUser( nickname ) {
+        if (nickname==="cellard0or")
+          return "Simon";
+        else if (nickname==="valerianBlos")
+          return "Valerian";
+        else
+          return "Thomas";
+      }
+      var users = {Thomas:"thomaseichinger", Simon:"cellard0or", Valerian:"valerianBlos"};
+      var baseUrl = 'https://api.github.com/repos/teamgrau/altourism/issues?milestone=1&assignee=';
+      for (var prop in users) {
+          //alert("Name: " + prop + " Nick: " + users[prop]);
+          var url = baseUrl + users[prop] + "&callback=?";
+          $.getJSON(url, 
+                  function(json){
+                    var items = [];
+                    items.push('<h5>' + mapUser(json.data[0].assignee.login) + '</h5><ul>');
+                    for (var i = json.data.length - 1; i >= 0; i--) {
+                      var url;
+                      var title;
+                      $.each(json.data[i], function(key, val) {
+                        if (key === 'html_url')
+                          url = val;
+                        if (key == 'title')
+                          title = val;
+                      });
+                      items.push('<li><a href="' + url +'">' + title + '</a></li>')
+                    };
+                    items.push('</ul>');
+                    $('<div/>', {html: items.join('')}).appendTo('#responsibilities');
+                  });
+      };
       $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1?callback=?',
                 function(json) {
         //alert("status: " + status);
@@ -147,14 +142,6 @@ Anwendung formuliert.</a>
         });
         val = (completed/total)*100;
         $("#progressbar").css("width", val);
-        /*$(function() {
-          $( "#progressbar" ).progressbar({
-              value: val
-          })
-          .children('.ui-progressbar-value')
-          .html(val.toPrecision(3) + '%')
-          .css("display", "block");
-        });*/
       })
       //.success(function() {alert("success");})
       .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
