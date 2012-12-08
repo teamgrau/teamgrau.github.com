@@ -155,9 +155,9 @@ Anwendung formuliert.</a>
           items.push('<li id="' + key + '">' + val + '</li>');
           //alert("key: "+key+" val: "+val);
           if (key === 'closed_issues')
-            completed += val;
+            completed = val;
           else if (key === 'open_issues')
-            total += val
+            total = val
         });
         val = (completed/total)*100;
         $("#progressbar").css("width", val);
