@@ -85,7 +85,7 @@ Anwendung formuliert.</a>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <!--<script src="javascripts/scale.fix.js"></script>-->
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript">
       //alert("before");
@@ -125,7 +125,7 @@ Anwendung formuliert.</a>
                     $('<div/>', {html: items.join('')}).appendTo('#responsibilities');
                   });
       };
-      $.getJSON('https://api.github.com/repos/teamgrau/altourism/issues?milestone=1&status=closed&callback=?', 
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/issues?milestone=1&state=closed&callback=?', 
                   function(json){
                     var items = [];
                     items.push("<ul>")
@@ -166,5 +166,6 @@ Anwendung formuliert.</a>
       .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
       //.complete(function() {alert("complete");});
     </script>
+    <script src="javascripts/scale.fix.js"></script>
   </body>
 </html>
