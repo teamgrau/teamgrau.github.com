@@ -65,7 +65,7 @@ Anwendung formuliert.</a>
 	    Wir sehen diese Iteration als erfolgreich an, wenn alle Issues des <a href="https://github.com/teamgrau/altourism/issues?milestone=1">
 1. Milestones</a> geschlossen werden können.
 	  </p>
-        <h3 id="responsibilities">Responsibilities</h3>
+        <h3 id="responsibilities">Open</h3>
           <!--<h4>Simon</h4>
           <ul>
             <li><a href="">Lorem ipsum</a></li>
@@ -78,7 +78,7 @@ Anwendung formuliert.</a>
           <ul>
             <li><a href="">consectetur adipiscing elit.</a></li>
           </ul>-->
-        <h3 id="done">Done</h3>
+        <h3 id="done">Closed</h3>
 
       </section>
       <footer>
@@ -125,7 +125,30 @@ Anwendung formuliert.</a>
                     $('<div/>', {html: items.join('')}).appendTo('#responsibilities');
                   });
       };
-      $.getJSON('https://api.github.com/repos/teamgrau/altourism/issues?milestone=1&state=closed&callback=?', 
+      for (var prop in users) {
+          //alert("Name: " + prop + " Nick: " + users[prop]);
+          var url = baseUrl + users[prop];
+          url = url + "&state=closed&callback=?";
+          $.getJSON(url, 
+                  function(json){
+                    var items = [];
+                    items.push('<h5>' + mapUser(json.data[0].assignee.login) + '</h5><ul>');
+                    for (var i = json.data.length - 1; i >= 0; i--) {
+                      var url;
+                      var title;
+                      $.each(json.data[i], function(key, val) {
+                        if (key === 'html_url')
+                          url = val;
+                        if (key == 'title')
+                          title = val;
+                      });
+                      items.push('<li><a href="' + url +'"><strike>' + title + '</strike></a></li>')
+                    };
+                    items.push('</ul>');
+                    $('<div/>', {html: items.join('')}).appendTo('#done');
+                  });
+      };
+      /*$.getJSON('https://api.github.com/repos/teamgrau/altourism/issues?milestone=1&state=closed&callback=?', 
                   function(json){
                     var items = [];
                     items.push("<ul>")
@@ -142,7 +165,7 @@ Anwendung formuliert.</a>
                     };
                     items.push('</ul>');
                     $('<div/>', {html: items.join('')}).appendTo('#done');
-                  });
+                  });*/
       $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/1?callback=?',
                 function(json) {
         //alert("status: " + status);
