@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>teamgrau.github.com by teamgrau</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/table.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap_own.css" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Altourism beta</h1>
+        <p>Softwareproject Human-Centered Computing</p>
+
+        <h3><a href="./index.html"><div>Home</div></a></h3>
+        <h3><a href="./persona.html"><div>Persona</div></a></h3>
+        <h3><a href="./functionality.html"><div>Functionality</div></a></h3>
+        <h3><a href="./iteration_plan.html"><div>Iteration Plan</div></a></h3>
+	<h3><a href="./other_artifacts.html"><div>Other Artifacts</div></a></h3>
+
+        <p class="view"><a href="https://github.com/teamgrau">View Our GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h3>Progress</h3>
+        <a href="https://github.com/teamgrau/altourism/issues?milestone=2">
+          <div class="progress">
+            <div id="progressbar" class="bar" style="width: 0%;"></div>
+          </div>
+        </a>
+
+        <h3 id="goal">Iterationsziel</h3>
+        <p>In dieser Iteration wollen wir restlichen Issues aus der 1. User Story schließen und die
+          die User Stories 2 und 3 umsetzen.
+        </p>
+        
+        <h3 id="responsibilities">Open</h3>
+          
+        <h3 id="done">Closed</h3>
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript">
+      function mapUser( nickname ) {
+        if (nickname==="cellard0or")
+          return "Simon";
+        else if (nickname==="valerianBlos")
+          return "Valerian";
+        else
+          return "Thomas";
+      }
+      var users = {Thomas:"thomaseichinger", Simon:"cellard0or", Valerian:"valerianBlos"};
+      var baseUrl = 'https://api.github.com/repos/teamgrau/altourism/issues?milestone=2&assignee=';
+      for (var prop in users) {
+          //alert("Name: " + prop + " Nick: " + users[prop]);
+          var url = baseUrl + users[prop] + "&callback=?";
+          $.getJSON(url, 
+                  function(json){
+                    var items = [];
+                    items.push('<h5>' + mapUser(json.data[0].assignee.login) + '</h5><ul>');
+                    for (var i = json.data.length - 1; i >= 0; i--) {
+                      var url;
+                      var title;
+                      $.each(json.data[i], function(key, val) {
+                        if (key === 'html_url')
+                          url = val;
+                        if (key == 'title')
+                          title = val;
+                      });
+                      items.push('<li><a href="' + url +'">' + title + '</a></li>')
+                    };
+                    items.push('</ul>');
+                    $('<div/>', {html: items.join('')}).appendTo('#responsibilities');
+                  });
+      };
+      for (var prop in users) {
+          //alert("Name: " + prop + " Nick: " + users[prop]);
+          var url = baseUrl + users[prop];
+          url = url + "&state=closed&callback=?";
+          $.getJSON(url, 
+                  function(json){
+                    var items = [];
+                    items.push('<h5>' + mapUser(json.data[0].assignee.login) + '</h5><ul>');
+                    for (var i = json.data.length - 1; i >= 0; i--) {
+                      var url;
+                      var title;
+                      $.each(json.data[i], function(key, val) {
+                        if (key === 'html_url')
+                          url = val;
+                        if (key == 'title')
+                          title = val;
+                      });
+                      items.push('<li><a href="' + url +'"><strike>' + title + '</strike></a></li>')
+                    };
+                    items.push('</ul>');
+                    $('<div/>', {html: items.join('')}).appendTo('#done');
+                  });
+      };
+      $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/2?callback=?',
+                function(json) {
+        //alert("status: " + status);
+        var val = 0;
+        var completed = 0;
+        var total = 0;
+        var items = [];
+        //alert("compl: " + completed + " total: " + total);
+        $.each(json.data, function(key, val) {
+          items.push('<li id="' + key + '">' + val + '</li>');
+          //alert("key: "+key+" val: "+val);
+          if (key === 'closed_issues')
+            completed = val;
+          else if (key === 'open_issues')
+            total = val
+        });
+        val = (completed/total)*100;
+        $("#progressbar").css("width", val);
+      })
+      //.success(function() {alert("success");})
+      .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
+      //.complete(function() {alert("complete");});
+    </script>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
