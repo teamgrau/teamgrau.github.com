@@ -173,6 +173,19 @@ Anwendung formuliert.</a>
                 </div>
               </td>
             </tr>
+            <tr>
+              <th scope="row" id="i5"><a href="iteration5.html">5<sup>th</sup> Iteration (de)</a></th>
+              <td>
+                <ul>
+                  <li>Iteration Summary</li>
+                </ul>
+              </td>
+              <td>
+                <div class="progress">
+                  <div id="progressbar5" class="bar" style="width: 100%;"></div>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
         
@@ -257,6 +270,27 @@ Anwendung formuliert.</a>
     })
     //.success(function() {alert("success");})
     .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
+    $.getJSON('https://api.github.com/repos/teamgrau/altourism/milestones/4?callback=?',
+                function(json) {
+        //alert("status: " + status);
+        var val = 0;
+        var completed = 0;
+        var total = 0;
+        var items = [];
+        //alert("compl: " + completed + " total: " + total);
+        $.each(json.data, function(key, val) {
+          items.push('<li id="' + key + '">' + val + '</li>');
+          //alert("key: "+key+" val: "+val);
+          if (key === 'closed_issues')
+            completed = val;
+          else if (key === 'open_issues')
+            total = val
+        });
+        val = (completed/total)*100;
+        $("#progressbar5").css("width", val);
+      })
+      //.success(function() {alert("success");})
+      .error(function(json) {alert("Error, sorry no dynamic progress bar. :-(");});
     </script>
   </body>
 </html>
