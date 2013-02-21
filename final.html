@@ -12,6 +12,12 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script src="javascripts/galleria/galleria-1.2.8.min.js"></script>
+    <script>
+      Galleria.loadTheme('javascripts/galleria/themes/classic/galleria.classic.min.js');
+      Galleria.run('#galleria', {showInfo: true});
+    </script>
   </head>
   <body>
     <div class="wrapper">
@@ -42,6 +48,33 @@
           <a href="./files/presentation.pdf">Abschlusspräsentation</a>
         </p>
         
+        <h3>Screenshots</h3>
+        <div id="galleria">
+          <a href="pics/screenshots/Splash.png">
+            <img src="pics/screenshots/Splash.png" data-title="Splashscreen" data-description="">
+          </a>
+          <a href="pics/screenshots/Welcome.png">
+            <img src="pics/screenshots/Welcome.png" data-title="Welcome Bubble" data-description="">
+          </a>
+          <a href="pics/screenshots/StoryListe.png">
+            <img src="pics/screenshots/StoryListe.png" data-title="Story Liste" data-description="">
+          </a>
+          <a href="pics/screenshots/StoryListe_Detail.png">
+            <img src="pics/screenshots/StoryListe_Detail.png" data-title="Story Liste mit Detailansicht" data-description="">
+          </a>
+          <a href="pics/screenshots/Tell_Story_to_POI_fstHalf.png">
+            <img src="pics/screenshots/Tell_Story_to_POI_fstHalf.png" data-title="Telling a new story" data-description="">
+          </a>
+          <a href="pics/screenshots/Tell_Story_to_POI_sndHalf.png">
+            <img src="pics/screenshots/Tell_Story_to_POI_sndHalf.png" data-title="Telling a new story" data-description="">
+          </a>
+          <a href="pics/screenshots/Tell_Story_to_POI_newPicture.png">
+            <img src="pics/screenshots/Tell_Story_to_POI_newPicture.png" data-title="Taking a picture for the new story" data-description="">
+          </a>
+          <a href="pics/screenshots/Tell_Story_to_POI_Success.png">
+            <img src="pics/screenshots/Tell_Story_to_POI_Success.png" data-title="Great success" data-description="">
+          </a>
+        </div>
         <h3>Video</h3>
         <p>
           <!-- or an other link -->
